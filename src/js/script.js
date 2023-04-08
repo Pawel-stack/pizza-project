@@ -169,22 +169,30 @@
           const option = param.options[optionId];
           console.log(optionId, option);
 
-           // check if there is param with a name of paramId in formData and if it includes optionId
-           if(formData[paramId] && formData[paramId].includes(optionId)) {
-            // check if the option is not default
+          // check if there is param with a name of paramId in formData and if it includes optionId
+          if(formData[paramId] && formData[paramId].includes(optionId)) {
+          // check if the option is not default
             if(!option.default) {
-              // add option price to price variable
-              price += option.price 
+            // add option price to price variable
+              price += option.price; 
             }
           } else {
-              // check if the option is default
-              if(option.default) {
-               // reduce price variable
-               price -= option.price 
-              }
+            // check if the option is default
+            if(option.default) {
+              // reduce price variable
+              price -= option.price; 
+            }
           }
 
-          const optionImage = thisProduct.imageWrapper.querySelector()
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+
+          if(optionImage){
+            if(formData[paramId] && formData[paramId].includes(optionId)) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            }else {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
         }
       }
 
@@ -215,7 +223,7 @@
       //console.log('*** App starting ***');
       //console.log('thisApp:', thisApp);
       //console.log('classNames:', classNames);
-      //console.log('settings:', settings);
+      console.log('settings:', settings);
       //console.log('templates:', templates);
 
       thisApp.initData();
