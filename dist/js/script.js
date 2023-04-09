@@ -241,15 +241,13 @@
 
       /*TO DO: add validation*/
       if(thisWidget.value !== newValue && !isNaN(newValue)){
-        //console.log('thisWidgetvalue:', thisWidget.value);
-        if(newValue >= settings.amountWidget.defaultMax -1){
-          if(newValue <= settings.amountWidget.defaultMin +1){
-            thisWidget.value = newValue; 
+        if (newValue >= settings.amountWidget.defaultMin){
+          if (newValue <= settings.amountWidget.defaultMax +1){
+            thisWidget.value = newValue;
           }
         }
       }
-      thisWidget.value = newValue;
-      console.log('newValue:', newValue);
+      
       thisWidget.input.value = thisWidget.value;
     }
 
