@@ -411,7 +411,11 @@
 
       const thisCart = this; 
 
-      const generatedHTML = 
+      const generatedHTML = templates.cartProduct(menuProduct);
+
+      const generatedDom = utils.createDOMFromHTML(generatedHTML);
+
+      thisCart.dom.productList.appendChild(generatedDom);
 
       console.log('adding product:', menuProduct);
     }
