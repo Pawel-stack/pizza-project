@@ -417,7 +417,16 @@
 
       thisCart.dom.productList.appendChild(generatedDom);
 
+      thisCart.products.push(menuProduct);
+      console.log('thisCart.products:', thisCart.products);
+
       console.log('adding product:', menuProduct);
+    }
+  }
+
+  class CartProduct{
+    constructor(menuProduct, element){
+
     }
   }
 
