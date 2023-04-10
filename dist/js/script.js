@@ -271,7 +271,7 @@
         amount: thisProduct.amountWidget.value, 
         priceSingle: thisProduct.priceSingle,
         price: thisProduct.priceSingle * thisProduct.amountWidget.value,
-        params: {},
+        params: thisProduct.prepareCartProductParams()
       };
 
       return productSummary;
@@ -291,7 +291,7 @@
         params[paramId] = {
           label: param.label,
           options: {}
-        }
+        };
 
         // for every option in this category
         for(let optionId in param.options) {
@@ -300,11 +300,12 @@
 
           if(optionSelected) {
             // option is selected!
+            params[paramId].options[optionId] = option.label; 
           }
         }
       }
 
-  return params;
+      return params;
     }
   }
 
@@ -394,6 +395,7 @@
       thisCart.dom.wrapper = element; 
 
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
 
     }
 
@@ -407,7 +409,9 @@
 
     add(menuProduct){
 
-      //const thisCart = this; 
+      const thisCart = this; 
+
+      const generatedHTML = 
 
       console.log('adding product:', menuProduct);
     }
