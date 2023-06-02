@@ -10,11 +10,7 @@ const app = {
 
     thisApp.widgetContainer = document.querySelector(select.containerOf.booking);
 
-    class Booking{
-      constructor(){
-
-      }
-    }
+    thisApp.booking = new Booking(thisApp.widgetContainer);
   },
 
   initPages: function(){
