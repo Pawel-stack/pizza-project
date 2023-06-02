@@ -21,9 +21,8 @@ class Booking{
     bookingContainer.appendChild(thisBooking.element);
 
     thisBooking.dom = {
-        wrapper: element,
+      wrapper: element,
     };
-    
 
   }
 

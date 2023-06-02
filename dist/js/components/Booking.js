@@ -23,7 +23,6 @@ class Booking{
     thisBooking.dom = {
         wrapper: element,
     };
-    
 
   }
 
