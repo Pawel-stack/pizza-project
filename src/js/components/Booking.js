@@ -50,11 +50,16 @@ class Booking{
 
     //console.log('getDataUrls', urls);
 
-    fetch(urls.booking)
-      .then(function(bookingsResponse){
-        return bookingsResponse.json();
+    Promise.all([
+      fetch(urls.booking),
+    ])
+      .then(function(allResponses){
+        const bookingResponse = allResponses[0];
+        return Promise.all([
+          bookingResponse.json(),
+        ]);
       })
-      .then(function(bookings){
+      .then(function([bookings]){
         console.log(bookings);
       });
   }
