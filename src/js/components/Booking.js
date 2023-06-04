@@ -25,6 +25,7 @@ class Booking{
       wrapper: element,
       peopleAmount: element.querySelector(select.booking.peopleAmount),
       hoursAmount: element.querySelector(select.booking.hoursAmount),
+      datePicker: element.querySelector(select.widgets.datePicker),
     };
 
   }
