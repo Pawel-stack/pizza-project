@@ -1,7 +1,7 @@
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
-import { select, templates } from './../settings.js';
-import utils from './../utils.js';
+import { select, templates, settings } from './../settings.js';
+import utils from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 
 class Booking{
@@ -10,6 +10,53 @@ class Booking{
 
     thisBooking.render(element);
     thisBooking.initWidget();
+    thisBooking.getData();  
+  }
+
+  getData(){
+    const thisBooking = this; 
+
+    const startDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
+    const endDateParam =  settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
+
+    const params = {
+      booking: [
+        startDateParam,
+        endDateParam,
+      ],
+
+      eventsCurrent: [
+        settings.db.notRepeatParam,
+        startDateParam,
+        endDateParam,
+      ],
+
+      eventsRepeat: [
+        settings.db.repeatParam,
+        endDateParam,
+      ],
+    };
+
+    //console.log('getDataparams', params);
+
+    const urls = {
+      booking:       settings.db.url + '/' + settings.db.booking 
+                                     + '?' + params.booking.join('&'),
+      eventsCurrent: settings.db.url + '/' + settings.db.event   
+                                     + '?' + params.eventsCurrent.join('&'),
+      eventsrRepeat: settings.db.url + '/' + settings.db.event 
+                                     + '?' + params.eventsRepeat.join('&'),
+    }; 
+
+    //console.log('getDataUrls', urls);
+
+    fetch(urls.booking)
+      .then(function(bookingsResponse){
+        return bookingsResponse.json();
+      })
+      .then(function(bookings){
+        console.log(bookings);
+      });
   }
 
   render(element){
@@ -21,7 +68,7 @@ class Booking{
 
     const bookingContainer = document.querySelector(select.containerOf.booking);
 
-    bookingContainer.appendChild(thisBooking.element);
+    bookingContainer.appendChild(thisBooking.element); 
 
     thisBooking.dom = {
       wrapper: element,
