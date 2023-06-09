@@ -17,7 +17,7 @@ class Booking{
     const thisBooking = this; 
 
     const startDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
-    const endDateParam =  settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
+    const endDateParam   = settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
 
     const params = {
       booking: [
@@ -52,15 +52,23 @@ class Booking{
 
     Promise.all([
       fetch(urls.booking),
+      fetch(urls.eventsCurrent),
+      fetch(urls.eventsrRepeat),
     ])
       .then(function(allResponses){
-        const bookingResponse = allResponses[0];
+        const bookingsResponse = allResponses[0];
+        const eventsCurrentResponse = allResponses[1];
+        const eventsRepeatResponse = allResponses[2]; 
         return Promise.all([
-          bookingResponse.json(),
+          bookingsResponse.json(),
+          eventsCurrentResponse.json(),
+          eventsRepeatResponse.json(),
         ]);
       })
-      .then(function([bookings]){
-        console.log(bookings);
+      .then(function(bookings, eventsCurrent, eventsRepeat){
+        console.log('bookings',bookings);
+        console.log('eventsCurrent',eventsCurrent);
+        console.log('eventsRepeat',eventsRepeat);
       });
   }
 
